@@ -21,6 +21,10 @@ const StyledButton = styled.button`
     background-color: ${props => props.theme.colors.primaryLight};
     cursor: pointer;
   }
+  
+  :disabled {
+    background-color: ${props => props.theme.colors.borderGray};
+  }
 `;
 
 const Button = props => {

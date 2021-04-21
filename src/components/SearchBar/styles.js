@@ -11,7 +11,7 @@ export const MainWrapper = styled.div`
 export const InputWrapper = styled.div`
   padding-right: ${props => props.theme.spacing.padding / 2}px;
   padding-bottom: ${props => props.theme.spacing.padding / 2}px;
- 
+  
   @media (max-width: ${breakpoints.sm}) {
     width: 100%;
     padding-right: 0;

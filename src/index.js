@@ -9,8 +9,6 @@ import store from './store/store';
 import {ThemeProvider} from "styled-components";
 import {themeLight} from "./themes";
 
-console.log(themeLight);
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

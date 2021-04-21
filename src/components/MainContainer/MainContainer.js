@@ -1,8 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import SearchBar from "../SearchBar/SearchBar";
+import RepoList from "../RepoList/RepoList";
+import Pagination from "../Pagination/Pagination";
+import {useSelector} from "react-redux";
+import {isFetching} from "../../store/selectors";
 
 const ContainerDiv = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -14,15 +20,17 @@ const ContainerDiv = styled.div`
 `;
 
 const MainContainer = props => {
+
+  const loading = useSelector(isFetching);
+
   return (
     <ContainerDiv>
-      {props.children}
+      <LoadingOverlay show={loading}/>
+      <SearchBar/>
+      <RepoList/>
+      <Pagination/>
     </ContainerDiv>
   );
-};
-
-MainContainer.propTypes = {
-
 };
 
 export default MainContainer;
