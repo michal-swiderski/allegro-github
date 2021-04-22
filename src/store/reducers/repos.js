@@ -1,11 +1,10 @@
 import {RECEIVE_REPOS, RECEIVE_REPOS_ERROR, REQUEST_REPOS} from "../actions";
 
 const initialState = {
-  error: false,
+  error: null,
   isFetching: false,
-  totalCount: 0,
-  apiPage: 1,
-  currentPage: 1,
+  totalCount: null,
+  currentPage: null,
   itemsPerPage: 5,
   items: []
 };
@@ -34,7 +33,7 @@ const repos = (state = initialState, {type, payload}) => {
     case RECEIVE_REPOS_ERROR: {
       return {
         ...state,
-        error: true,
+        error: payload.error,
         isFetching: false
       }
     }

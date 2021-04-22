@@ -1,23 +1,43 @@
 import React from 'react';
 import RepoTile from "../RepoTile/RepoTile";
 import {useSelector} from "react-redux";
-import {getReposForUser, getUsername, isError} from "../../store/selectors";
-import {ErrorWrapper} from "./styles";
+import {getReposForUser, getTotalRepoCount, getUsername, isError} from "../../store/selectors";
+import {ErrorWrapper, NoWrap} from "./styles";
+import {StyledLink} from "../common/Link/Link";
+import {ERROR_USER_NOT_FOUND} from "../../constants";
 
 const RepoList = props => {
   const repos = useSelector(getReposForUser);
   const username = useSelector(getUsername);
+  const total = useSelector(getTotalRepoCount);
   const error = useSelector(isError);
 
-  if (error) {
+  if(total === 0) {
     return (
-      <ErrorWrapper>Something went wrong :( Try again</ErrorWrapper>
+      <ErrorWrapper>
+        <span>
+          <StyledLink href={`https://github.com/${username}`}>This user</StyledLink>&nbsp;
+          does not have any public repositories.
+        </span>
+      </ErrorWrapper>
+    )
+  }
+
+  if (error) {
+    let errorMessage;
+    if(error === ERROR_USER_NOT_FOUND) {
+      errorMessage = <>{`User ${username} not found`} <NoWrap>¯\_(ツ)_/¯</NoWrap></>;
+    } else {
+      errorMessage = <>{`Something went wrong :( Try again`} <NoWrap>(╯°□°)╯︵┻━┻</NoWrap></>;
+    }
+    return (
+      <ErrorWrapper>{errorMessage}</ErrorWrapper>
     )
   }
 
   if (username === '') {
     return (
-      <ErrorWrapper>Nothing to see here yet, type a username in the box above!</ErrorWrapper>
+      <ErrorWrapper>Nothing to see here, type a username in the box above!</ErrorWrapper>
     );
   }
 

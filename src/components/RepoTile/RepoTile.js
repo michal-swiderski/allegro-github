@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import {BadgesWrapper, DescriptionText, MainWrapper, RepoLink} from "./styles";
 import Badge from "./Badge/Badge";
 import {faCode, faCodeBranch, faStar} from "@fortawesome/free-solid-svg-icons";
+import {StyledLink} from "../common/Link/Link";
 
 const RepoTile = ({repo, mock}) => {
 
   return (
     <MainWrapper>
-      <RepoLink href={repo.clone_url} target="_blank">{repo.name}</RepoLink>
+      <StyledLink href={repo.clone_url} target="_blank">{repo.name}</StyledLink>
       <div>
         <DescriptionText>{repo.description}</DescriptionText>
       </div>

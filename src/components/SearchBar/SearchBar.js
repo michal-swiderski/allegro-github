@@ -3,17 +3,17 @@ import {ButtonWrapper, InputWrapper, MainWrapper, PaginationWrapper, SearchWrapp
 import TextInput from "../common/Input/TextInput";
 import {useSelector} from "react-redux";
 import Button from "../common/Button/Button";
-import {getUsername, isError} from "../../store/selectors";
+import {getTotalRepoCount, getUsername, isError} from "../../store/selectors";
 import Pagination from "../Pagination/Pagination";
 import {useHistory} from "react-router-dom";
 
 const SearchBar = props => {
   const [username, setUsername] = useState('');
-  const [dirty, setDirty] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
 
   const storeUsername = useSelector(getUsername);
   const error = useSelector(isError);
+  const total = useSelector(getTotalRepoCount);
   const history = useHistory();
 
   useEffect(() => {
@@ -26,11 +26,10 @@ const SearchBar = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setDirty(true);
     history.push(`/${username}/1`);
   }
 
-  const showPagination = !error && !!storeUsername;
+  const showPagination = !error && !!storeUsername && total > 0;
 
   return (
       <MainWrapper>
@@ -43,7 +42,7 @@ const SearchBar = props => {
                        onFocus={() => setInputFocused(true)}/>
           </InputWrapper>
           <ButtonWrapper>
-            <Button fullWidth disabled={dirty && username === ''}>Search</Button>
+            <Button fullWidth disabled={username === ''}>Search</Button>
           </ButtonWrapper>
         </SearchWrapper>
       </MainWrapper>

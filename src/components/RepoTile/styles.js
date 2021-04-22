@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {StyledLink} from "../common/Link/Link";
 
 export const MainWrapper = styled.div`
   padding: ${props => props.theme.spacing.padding}px;
@@ -19,7 +20,7 @@ export const DescriptionText = styled.span`
   font-size: 1.4rem;
 `
 
-export const RepoLink = styled.a`
+export const RepoLink = styled(StyledLink)`
   text-decoration: none;
   font-weight: bold;
   
