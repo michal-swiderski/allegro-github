@@ -28,7 +28,9 @@ const MainContainer = props => {
 
   useEffect(() => {
     dispatch(setUsername(params.username || ''));
-    dispatch(changePage(Number(params.page) || 1));
+    if(params.username) {
+      dispatch(changePage(Number(params.page) || 1));
+    }
   }, [dispatch, params.username, params.page]);
 
   return (

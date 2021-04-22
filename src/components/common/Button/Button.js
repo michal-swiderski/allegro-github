@@ -23,7 +23,9 @@ const StyledButton = styled.button`
   }
   
   :disabled {
-    background-color: ${props => props.theme.colors.borderGray};
+    transition: none;
+    cursor: auto;
+    background-color: ${props => props.theme.colors.buttonDisabled};
   }
 `;
 

@@ -9,6 +9,7 @@ import {useHistory} from "react-router-dom";
 
 const SearchBar = props => {
   const [username, setUsername] = useState('');
+  const [dirty, setDirty] = useState(false);
   const [inputFocused, setInputFocused] = useState(false);
 
   const storeUsername = useSelector(getUsername);
@@ -25,7 +26,8 @@ const SearchBar = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push(`/${storeUsername}/1`);
+    setDirty(true);
+    history.push(`/${username}/1`);
   }
 
   const showPagination = !error && !!storeUsername;
@@ -41,7 +43,7 @@ const SearchBar = props => {
                        onFocus={() => setInputFocused(true)}/>
           </InputWrapper>
           <ButtonWrapper>
-            <Button fullWidth>Search</Button>
+            <Button fullWidth disabled={dirty && username === ''}>Search</Button>
           </ButtonWrapper>
         </SearchWrapper>
       </MainWrapper>
