@@ -6,17 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 
 import store from './store/store';
-import {ThemeProvider} from "styled-components";
-import {lightTheme} from "./themes";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={lightTheme}>
-        <App/>
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App/>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

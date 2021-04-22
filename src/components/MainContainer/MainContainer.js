@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import SearchBar from "../SearchBar/SearchBar";
 import RepoList from "../RepoList/RepoList";
 import Pagination from "../Pagination/Pagination";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {isFetching} from "../../store/selectors";
+import {useParams} from 'react-router-dom';
+import {changePage, setUsername} from "../../store/actions";
 
 const ContainerDiv = styled.div`
   position: relative;
@@ -20,8 +22,14 @@ const ContainerDiv = styled.div`
 `;
 
 const MainContainer = props => {
-
+  const dispatch = useDispatch();
+  const params = useParams();
   const loading = useSelector(isFetching);
+
+  useEffect(() => {
+    dispatch(setUsername(params.username || ''));
+    dispatch(changePage(Number(params.page) || 1));
+  }, [dispatch, params.username, params.page]);
 
   return (
     <ContainerDiv>

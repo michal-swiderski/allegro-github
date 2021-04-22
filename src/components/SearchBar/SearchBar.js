@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {ButtonWrapper, InputWrapper, MainWrapper, PaginationWrapper, SearchWrapper} from "./styles";
 import TextInput from "../common/Input/TextInput";
-import {useDispatch, useSelector} from "react-redux";
-import {changePage, setUsername as setUsernameAction} from "../../store/actions";
+import {useSelector} from "react-redux";
 import Button from "../common/Button/Button";
 import {getUsername, isError} from "../../store/selectors";
 import Pagination from "../Pagination/Pagination";
+import {useHistory} from "react-router-dom";
 
 const SearchBar = props => {
   const [username, setUsername] = useState('');
   const [inputFocused, setInputFocused] = useState(false);
 
-  const dispatch = useDispatch();
   const storeUsername = useSelector(getUsername);
   const error = useSelector(isError);
+  const history = useHistory();
 
   useEffect(() => {
     setUsername(storeUsername);
@@ -25,8 +25,7 @@ const SearchBar = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(setUsernameAction(username));
-    dispatch(changePage(1));
+    history.push(`/${storeUsername}/1`);
   }
 
   const showPagination = !error && !!storeUsername;

@@ -7,22 +7,34 @@ import {ThemeProvider} from "styled-components";
 import {useSelector} from "react-redux";
 import {getTheme} from "./store/selectors";
 import GlobalStyle from "./styles/global";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
 
   const isDarkTheme = useSelector(getTheme);
 
   return (
-    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-      <GlobalStyle/>
-      <div className="App">
-        <span/>
-        <div>
-          <MainContainer/>
+    <Router>
+      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+        <GlobalStyle/>
+        <div className="App">
+          <span/>
+          <div>
+            <Switch>
+              <Route path="/:username?/:page?">
+                <MainContainer/>
+              </Route>
+            </Switch>
+          </div>
+          <Footer/>
         </div>
-        <Footer/>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 

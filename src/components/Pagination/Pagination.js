@@ -1,23 +1,25 @@
 import React from "react";
 import {MainWrapper, PagesWrapper} from "./styles";
 import Button from "../common/Button/Button";
-import {useDispatch, useSelector} from "react-redux";
-import {changePage} from "../../store/actions";
-import {getCurrentPage, getTotalRepoCount} from "../../store/selectors";
+import {useSelector} from "react-redux";
+import {getCurrentPage, getTotalRepoCount, getUsername} from "../../store/selectors";
+import {useHistory} from "react-router-dom";
 
-const Pagination = props => {
-  const dispatch = useDispatch();
+const Pagination = () => {
+  const history = useHistory();
+
+  const username = useSelector(getUsername);
 
   const totalCount = useSelector(getTotalRepoCount);
   const currentPage = useSelector(getCurrentPage);
   const pageCount = Math.ceil(totalCount / 5);
 
   const handlePreviousClick = () => {
-    dispatch(changePage(currentPage - 1));
+    history.push(`/${username}/${currentPage - 1}`);
   };
 
   const handleNextClick = () => {
-    dispatch(changePage(currentPage + 1));
+    history.push(`/${username}/${currentPage + 1}`);
   };
 
   return (
