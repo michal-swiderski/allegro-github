@@ -4,7 +4,8 @@ import {BadgesWrapper, DescriptionText, MainWrapper, RepoLink} from "./styles";
 import Badge from "./Badge/Badge";
 import {faCode, faCodeBranch, faStar} from "@fortawesome/free-solid-svg-icons";
 
-const RepoTile = ({repo}) => {
+const RepoTile = ({repo, mock}) => {
+
   return (
     <MainWrapper>
       <RepoLink href={repo.clone_url} target="_blank">{repo.name}</RepoLink>
@@ -21,7 +22,8 @@ const RepoTile = ({repo}) => {
 };
 
 RepoTile.propTypes = {
-  repo: PropTypes.object.isRequired
+  repo: PropTypes.object.isRequired,
+  mock: PropTypes.bool
 };
 
 export default RepoTile;

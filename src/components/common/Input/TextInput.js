@@ -10,7 +10,7 @@ const Input = styled.input`
   padding: 0 ${props => props.theme.spacing.padding}px;
   background-color: ${props => props.theme.colors.background};
   font-size: 16px;
-  transition: all 0.2s;
+  transition: outline-color 0.2s;
   
   width: ${props => props.fullWidth ? '100%' : 'auto'};
   

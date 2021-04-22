@@ -20,5 +20,15 @@ const light = {
   }
 }
 
-export const themeLight = merge(common, light);
+const dark = {
+  colors : {
+    background : '#0d1117',
+    textColorPrimary: '#c9d1d9',
+    textColorSecondary: '#c9d1d9',
+    borderGray: 'lightgray'
+  }
+}
+
+export const lightTheme = merge({}, common, light);
+export const darkTheme = merge({}, common, dark);
 

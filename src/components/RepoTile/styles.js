@@ -34,5 +34,6 @@ export const RepoLink = styled.a`
 
 export const BadgesWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin-top: ${props => props.theme.spacing.padding}px;
 `;

@@ -17,3 +17,11 @@ export const getCurrentPage = store => {
 export const isFetching = store => {
   return store.repos.isFetching;
 }
+
+export const isError = store => {
+  return store.repos.error;
+}
+
+export const getTheme = store => {
+  return store.darkTheme;
+}

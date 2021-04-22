@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
-import {MainWrapper} from "./styles";
+import React from "react";
+import {MainWrapper, PagesWrapper} from "./styles";
 import Button from "../common/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {changePage} from "../../store/actions";
 import {getCurrentPage, getTotalRepoCount} from "../../store/selectors";
 
 const Pagination = props => {
-  // const [currentPage, setCurrentPage] = useState(1);
-
   const dispatch = useDispatch();
 
   const totalCount = useSelector(getTotalRepoCount);
@@ -26,7 +23,7 @@ const Pagination = props => {
   return (
     <MainWrapper>
       <Button onClick={handlePreviousClick} disabled={currentPage === 1}>Previous</Button>
-      <span>{currentPage} / {pageCount}</span>
+      <PagesWrapper>{currentPage}&nbsp;/&nbsp;{pageCount}</PagesWrapper>
       <Button onClick={handleNextClick} disabled={currentPage === pageCount}>Next</Button>
     </MainWrapper>
   );

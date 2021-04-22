@@ -1,5 +1,6 @@
 import {Octokit} from "@octokit/rest";
-import {clamp, range} from "lodash";
+
+export const TOGGLE_THEME = 'TOGGLE_THEME';
 
 export const SET_USERNAME = 'SET_USERNAME';
 export const SET_REPOS = 'SET_REPOS';
@@ -9,6 +10,10 @@ export const RECEIVE_REPOS_ERROR = 'RECEIVE_REPOS_ERROR';
 export const SET_PAGE = 'SET_PAGE';
 
 const octokit = new Octokit();
+
+export const toggleTheme = () => ({
+  type: TOGGLE_THEME,
+});
 
 export const setUsername = name => ({
   type: SET_USERNAME,
@@ -29,6 +34,13 @@ export const receiveRepos = (items, totalCount, page) => ({
   },
 });
 
+export const receiveReposError = (error) => ({
+  type: RECEIVE_REPOS_ERROR,
+  payload : {
+    error
+  },
+});
+
 export const changePage = page => async (dispatch, getState) => {
   try {
     dispatch(requestRepos());
@@ -42,6 +54,7 @@ export const changePage = page => async (dispatch, getState) => {
     dispatch(receiveRepos(response.data.items, response.data.total_count, page));
   } catch (e) {
     console.error(e);
+    dispatch(receiveReposError(e));
   }
 
 };

@@ -7,12 +7,12 @@ import {Provider} from "react-redux";
 
 import store from './store/store';
 import {ThemeProvider} from "styled-components";
-import {themeLight} from "./themes";
+import {lightTheme} from "./themes";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={themeLight}>
+      <ThemeProvider theme={lightTheme}>
         <App/>
       </ThemeProvider>
     </Provider>

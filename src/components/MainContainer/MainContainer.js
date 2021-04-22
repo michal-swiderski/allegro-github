@@ -28,7 +28,6 @@ const MainContainer = props => {
       <LoadingOverlay show={loading}/>
       <SearchBar/>
       <RepoList/>
-      <Pagination/>
     </ContainerDiv>
   );
 };

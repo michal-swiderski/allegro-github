@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import {StyledOverlay} from "./styles";
 
 const LoadingOverlay = ({show}) => {
-  if(!show){
-    return null;
-  }
-
   return (
-    <StyledOverlay/>
+    <StyledOverlay show={show}/>
   );
 };
 

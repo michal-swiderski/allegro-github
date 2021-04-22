@@ -1,5 +1,5 @@
 import { SET_USERNAME } from "../actions";
-const initialState = 'allegro';
+const initialState = '';
 
 const username = (state = initialState, {type, payload}) => {
   switch (type) {

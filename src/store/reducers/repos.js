@@ -1,4 +1,4 @@
-import {RECEIVE_REPOS, REQUEST_REPOS} from "../actions";
+import {RECEIVE_REPOS, RECEIVE_REPOS_ERROR, REQUEST_REPOS} from "../actions";
 
 const initialState = {
   error: false,
@@ -28,6 +28,14 @@ const repos = (state = initialState, {type, payload}) => {
         totalCount: payload.totalCount,
         currentPage: payload.currentPage,
         items: payload.items
+      }
+    }
+
+    case RECEIVE_REPOS_ERROR: {
+      return {
+        ...state,
+        error: true,
+        isFetching: false
       }
     }
 
