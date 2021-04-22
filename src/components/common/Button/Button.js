@@ -27,6 +27,10 @@ const StyledButton = styled.button`
     cursor: auto;
     background-color: ${props => props.theme.colors.buttonDisabled};
   }
+  
+  :active {
+    background-color: ${props => props.theme.colors.primaryLight2};
+  }
 `;
 
 const Button = props => {

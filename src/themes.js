@@ -7,6 +7,7 @@ const common = {
   colors: {
     primary: '#ff5a00',
     primaryLight: '#ff7b33',
+    primaryLight2: '#ff9c66',
     link: '#58a6ff',
   }
 }
