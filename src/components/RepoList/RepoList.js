@@ -1,7 +1,7 @@
 import React from 'react';
 import RepoTile from "../RepoTile/RepoTile";
 import {useSelector} from "react-redux";
-import {getReposForUser, getTotalRepoCount, getUsername, isError} from "../../store/selectors";
+import {getReposForUser, getTotalRepoCount, getUsername, isError, isFetching} from "../../store/selectors";
 import {ErrorWrapper, NoWrap} from "./styles";
 import {StyledLink} from "../common/Link/Link";
 import {ERROR_USER_NOT_FOUND} from "../../constants";
@@ -11,6 +11,7 @@ const RepoList = props => {
   const username = useSelector(getUsername);
   const total = useSelector(getTotalRepoCount);
   const error = useSelector(isError);
+  const fetching = useSelector(isFetching);
 
   if(total === 0) {
     return (
@@ -28,7 +29,7 @@ const RepoList = props => {
     if(error === ERROR_USER_NOT_FOUND) {
       errorMessage = <>{`User ${username} not found`} <NoWrap>¯\_(ツ)_/¯</NoWrap></>;
     } else {
-      errorMessage = <>{`Something went wrong :( Try again`} <NoWrap>(╯°□°)╯︵┻━┻</NoWrap></>;
+      errorMessage = <>{`Something went wrong. Try again`} <NoWrap>(╯°□°)╯︵┻━┻</NoWrap></>;
     }
     return (
       <ErrorWrapper>{errorMessage}</ErrorWrapper>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import SearchBar from "../SearchBar/SearchBar";
 import RepoList from "../RepoList/RepoList";
-import Pagination from "../Pagination/Pagination";
 import {useDispatch, useSelector} from "react-redux";
 import {isFetching} from "../../store/selectors";
 import {useParams} from 'react-router-dom';

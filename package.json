@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "jest-styled-components": "^7.0.4",
     "prop-types": "^15.7.2"
   }
 }

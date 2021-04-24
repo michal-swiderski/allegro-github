@@ -20,21 +20,20 @@ export const DescriptionText = styled.span`
   font-size: 1.4rem;
 `
 
-export const RepoLink = styled(StyledLink)`
-  text-decoration: none;
-  font-weight: bold;
-  
-  :link, :visited {
-    color: ${props => props.theme.colors.primary};
-  }
-  
-  :hover {
-    text-decoration: underline;
-  }
-`;
-
 export const BadgesWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: ${props => props.theme.spacing.padding}px;
+`;
+
+export const MockRectangle = styled.div`
+  width: ${props => props.width};
+  height: 16px;
+  border-radius: 2px;
+  background-color: lightgray;
+  margin-bottom: ${props => props.theme.spacing.padding / 2}px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;

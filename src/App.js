@@ -2,11 +2,11 @@ import './App.css';
 import React from "react";
 import MainContainer from "./components/MainContainer/MainContainer";
 import Footer from "./components/Footer/Footer";
-import {darkTheme, lightTheme} from "./themes";
+import {darkTheme, lightTheme} from "./style/themes";
 import {ThemeProvider} from "styled-components";
 import {useSelector} from "react-redux";
 import {getTheme} from "./store/selectors";
-import GlobalStyle from "./styles/global";
+import GlobalStyle from "./style/global";
 import history from './history';
 import {
   Router,
@@ -27,9 +27,6 @@ function App() {
           <span/>
           <div>
             <Switch>
-              <Route path="/test">
-                <div>elko</div>
-              </Route>
               <Route exact path="/:username?/:page?">
                 <MainContainer/>
               </Route>

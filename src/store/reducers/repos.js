@@ -15,6 +15,7 @@ const repos = (state = initialState, {type, payload}) => {
     case REQUEST_REPOS: {
       return {
         ...state,
+        error: null,
         isFetching: true
       }
     }

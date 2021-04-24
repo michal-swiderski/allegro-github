@@ -9,9 +9,9 @@ const Pagination = () => {
   const history = useHistory();
 
   const username = useSelector(getUsername);
-
   const totalCount = useSelector(getTotalRepoCount);
   const currentPage = useSelector(getCurrentPage);
+
   const pageCount = Math.ceil(totalCount / 5);
 
   const handlePreviousClick = () => {

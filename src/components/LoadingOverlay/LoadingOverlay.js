@@ -4,7 +4,7 @@ import {StyledOverlay} from "./styles";
 
 const LoadingOverlay = ({show}) => {
   return (
-    <StyledOverlay show={show}/>
+    <StyledOverlay data-testid="loading-overlay" show={show}/>
   );
 };
 
