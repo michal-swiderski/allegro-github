@@ -23,10 +23,12 @@ test('It should display a repo list', async () => {
 
   renderWithProviders(<RepoList/>, {
     initialState: {
-      username: 'allegro',
       repos: {
+        username: 'allegro',
         items: [repo1, repo2],
         error: null,
+        currentPage: 1,
+        itemsPerPage: 2
       }
     }
   });

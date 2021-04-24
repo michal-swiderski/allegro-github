@@ -34,7 +34,9 @@ test('It should display username properly', async () => {
   const username = 'allegro';
   renderWithProviders(<SearchBar/>, {
     initialState: {
-      username
+      repos: {
+        username
+      }
     }
   });
 

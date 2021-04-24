@@ -55,8 +55,8 @@ test('It changes page upon clicking the \'Next\' button', async () => {
   const username = 'allegro';
   const page = 1;
   const store = createStore(rootReducer, {
-    username: 'allegro',
     repos: {
+      username: 'allegro',
       currentPage: page,
       totalCount: 50,
       perPage: 5
@@ -73,8 +73,8 @@ test('It changes page upon clicking the \'Previous\' button', async () => {
   const username = 'allegro';
   const page = 2;
   const store = createStore(rootReducer, {
-    username: 'allegro',
     repos: {
+      username: 'allegro',
       currentPage: page,
       totalCount: 50,
       perPage: 5
