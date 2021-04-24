@@ -1,9 +1,9 @@
 export const getUsername = store => {
-  return store.username;
+  return store.repos.username;
 }
 
-export const getReposForUser = store => {
-  return store.repos.items;
+export const getReposForUser = ({repos : {items, currentPage, itemsPerPage}}) => {
+  return items.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 }
 
 export const getTotalRepoCount = store => {

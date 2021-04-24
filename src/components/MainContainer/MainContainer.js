@@ -5,7 +5,7 @@ import RepoList from "../RepoList/RepoList";
 import {useDispatch, useSelector} from "react-redux";
 import {isFetching} from "../../store/selectors";
 import {useParams} from 'react-router-dom';
-import {changePage, setUsername} from "../../store/actions";
+import {fetchPage, setUsername} from "../../store/actions";
 import {MainContentWrapper, MainWrapper} from "./styles";
 
 
@@ -15,10 +15,7 @@ const MainContainer = props => {
   const loading = useSelector(isFetching);
 
   useEffect(() => {
-    dispatch(setUsername(params.username || ''));
-    if (params.username) {
-      dispatch(changePage(Number(params.page) || 1));
-    }
+    dispatch(fetchPage(params.username || '', Number(params.page) || 1));
   }, [dispatch, params.username, params.page]);
 
   return (

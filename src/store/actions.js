@@ -8,6 +8,7 @@ export const SET_REPOS = 'SET_REPOS';
 export const REQUEST_REPOS = 'REQUEST_REPOS';
 export const RECEIVE_REPOS = 'RECEIVE_REPOS';
 export const RECEIVE_REPOS_ERROR = 'RECEIVE_REPOS_ERROR';
+export const SET_PAGE = 'SET_PAGE';
 
 const octokit = new Octokit();
 
@@ -15,9 +16,9 @@ export const toggleTheme = () => ({
   type: TOGGLE_THEME,
 });
 
-export const setUsername = name => ({
+export const setUsername = username => ({
   type: SET_USERNAME,
-  payload: {name},
+  payload: {username},
 });
 
 export const requestRepos = () => ({
@@ -25,12 +26,13 @@ export const requestRepos = () => ({
   payload: null
 });
 
-export const receiveRepos = (items, totalCount, page) => ({
+export const receiveRepos = (items, totalCount, page, apiPage) => ({
   type: RECEIVE_REPOS,
   payload : {
     items,
     totalCount,
-    currentPage: page
+    currentPage: page,
+    apiPage: apiPage
   },
 });
 
@@ -41,25 +43,49 @@ export const receiveReposError = (error) => ({
   },
 });
 
-export const changePage = page => async (dispatch, getState) => {
+const setPage = (page) => ({
+  type: SET_PAGE,
+  payload : {
+    currentPage: page
+  }
+});
+
+export const fetchPage = (username, page) => async (dispatch, getState) => {
+
+  // if username has changed, change username and invalidate the cache
+  if(getState().repos.username !== username) {
+    dispatch(setUsername(username));
+  }
+
   if(page < 1) {
     return history.replace(`/${getState().username}/1`);
   }
+
+  // if requested items are already in the cache just change the page number
+  const itemsPerPage = getState().repos.itemsPerPage;
+  if(Object.keys(getState().repos.items.slice((page - 1) * itemsPerPage, page * itemsPerPage)).length === itemsPerPage) {
+    dispatch(setPage(page));
+    return;
+  }
+
+  //else fetch next page of 30 repositories
   dispatch(requestRepos());
   try {
+    const pageNeeded = Math.ceil(page * itemsPerPage / 30);
     const response = await octokit.request('/search/repositories', {
-      q: `user:${getState().username}`,
-      per_page: 5,
-      page: page,
+      q: `user:${getState().repos.username}`,
+      per_page: 30,
+      page: pageNeeded,
       sort: 'stars',
       direction: 'desc'
     });
 
+    //if page number is too big, redirect back to 1st
     if(page * 5 - response.data.total_count > 5) {
       return history.replace(`/${getState().username}/1`);
     }
 
-    dispatch(receiveRepos(response.data.items, response.data.total_count, page));
+    dispatch(receiveRepos(response.data.items, response.data.total_count, page, pageNeeded));
   } catch (e) {
     console.log(e);
     if(e.status === 422 && e.errors.some(error => error.field === 'q' && error.code === 'invalid')) {
@@ -67,7 +93,7 @@ export const changePage = page => async (dispatch, getState) => {
     } else if(e.status === 403) {
       dispatch(receiveReposError(ERROR_TOO_FAST));
     } else {
-      receiveReposError(ERROR_UNKNOWN);
+      dispatch(receiveReposError(ERROR_UNKNOWN));
     }
 
   }

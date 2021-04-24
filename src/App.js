@@ -24,7 +24,7 @@ function App() {
         <GlobalStyle/>
         <div className="App">
             <Switch>
-              <Route exact path="/:username?/:page?">
+              <Route exact path="/:username?/:page([0-9]+)?">
                 <MainContainer/>
               </Route>
               <Redirect to="/"/>
