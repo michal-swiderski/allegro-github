@@ -16,7 +16,6 @@ import {
 } from "react-router-dom";
 
 function App() {
-
   const isDarkTheme = useSelector(getTheme);
 
   return (
@@ -24,15 +23,12 @@ function App() {
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <GlobalStyle/>
         <div className="App">
-          <span/>
-          <div>
             <Switch>
               <Route exact path="/:username?/:page?">
                 <MainContainer/>
               </Route>
               <Redirect to="/"/>
             </Switch>
-          </div>
           <Footer/>
         </div>
       </ThemeProvider>

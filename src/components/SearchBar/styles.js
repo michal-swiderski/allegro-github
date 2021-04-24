@@ -5,7 +5,7 @@ export const MainWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: ${props => props.theme.spacing.padding}px;
+  margin-bottom: ${props => props.theme.spacing.padding * 2}px;
 `;
 
 export const PaginationWrapper = styled.div`

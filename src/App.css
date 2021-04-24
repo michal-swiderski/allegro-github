@@ -20,7 +20,3 @@ body {
     justify-content: space-between;
     padding: 0 16px;
 }
-
-.debug {
-    border: 1px solid red;
-}

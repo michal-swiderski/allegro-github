@@ -7,6 +7,7 @@ export const StyledFooter = styled.footer`
   align-items: center;
   justify-content: center;
   padding-bottom: ${props => props.theme.spacing.padding / 2}px;
+  margin-top: ${props => props.theme.spacing.padding}px;
   font-size: 1.2rem;
   
   & > a {
