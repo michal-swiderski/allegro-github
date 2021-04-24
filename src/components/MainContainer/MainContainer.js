@@ -15,7 +15,9 @@ const MainContainer = props => {
   const loading = useSelector(isFetching);
 
   useEffect(() => {
-    dispatch(fetchPage(params.username || '', Number(params.page) || 1));
+    if(params.username) {
+      dispatch(fetchPage(params.username || '', Number(params.page) || 1));
+    }
   }, [dispatch, params.username, params.page]);
 
   return (
