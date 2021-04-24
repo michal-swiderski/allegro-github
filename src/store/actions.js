@@ -58,7 +58,7 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
   }
 
   if(page < 1) {
-    return history.replace(`/${getState().username}/1`);
+    return history.replace(`/${getState().repos.username}/1`);
   }
 
   // if requested items are already in the cache just change the page number
@@ -82,7 +82,7 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
 
     //if page number is too big, redirect back to 1st
     if(page * 5 - response.data.total_count > 5) {
-      return history.replace(`/${getState().username}/1`);
+      return history.replace(`/${getState().repos.username}/1`);
     }
 
     dispatch(receiveRepos(response.data.items, response.data.total_count, page, pageNeeded));

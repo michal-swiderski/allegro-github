@@ -24,7 +24,10 @@ function App() {
         <GlobalStyle/>
         <div className="App">
             <Switch>
-              <Route exact path="/:username?/:page([0-9]+)?">
+              <Route exact path="/:username/">
+                {props => <Redirect to={`${props.match.params.username}/1`}/>}
+              </Route>
+              <Route exact path="/:username?/:page([1-9][0-9]*)?">
                 <MainContainer/>
               </Route>
               <Redirect to="/"/>

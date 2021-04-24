@@ -1,20 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {ButtonWrapper, InputWrapper, MainWrapper, PaginationWrapper, SearchWrapper} from "./styles";
 import TextInput from "../common/Input/TextInput";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Button from "../common/Button/Button";
-import {getTotalRepoCount, getUsername, isError} from "../../store/selectors";
+import {getCurrentPage, getTotalRepoCount, getUsername, isError} from "../../store/selectors";
 import Pagination from "../Pagination/Pagination";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+import {fetchPage} from "../../store/actions";
 
 const SearchBar = props => {
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState('');
   const [inputFocused, setInputFocused] = useState(false);
 
   const storeUsername = useSelector(getUsername);
   const error = useSelector(isError);
   const total = useSelector(getTotalRepoCount);
+  const currentPage = useSelector(getCurrentPage);
   const history = useHistory();
+
+  const params = useParams();
 
   useEffect(() => {
     setUsername(storeUsername);
@@ -26,6 +32,10 @@ const SearchBar = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    //if an error occured, manually dispatch a fetch action to force a refresh
+    if(error && username === storeUsername) {
+      return dispatch(fetchPage(username, currentPage || Number(params.page)));
+    }
     history.push(`/${username}/1`);
   }
 

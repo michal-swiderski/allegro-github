@@ -5,7 +5,7 @@ import RepoList from "../RepoList/RepoList";
 import {useDispatch, useSelector} from "react-redux";
 import {isFetching} from "../../store/selectors";
 import {useParams} from 'react-router-dom';
-import {fetchPage, setUsername} from "../../store/actions";
+import {fetchPage} from "../../store/actions";
 import {MainContentWrapper, MainWrapper} from "./styles";
 
 
