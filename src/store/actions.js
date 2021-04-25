@@ -1,6 +1,7 @@
 import {Octokit} from "@octokit/rest";
 import history from "../history";
-import {ERROR_TOO_FAST, ERROR_UNKNOWN, ERROR_USER_NOT_FOUND} from "../constants";
+import {ERROR_TOO_FAST, ERROR_UNKNOWN, ERROR_USER_NOT_FOUND, ITEMS_PER_API_PAGE} from "../constants";
+import {clamp} from "lodash";
 
 export const TOGGLE_THEME = 'TOGGLE_THEME';
 export const SET_USERNAME = 'SET_USERNAME';
@@ -51,6 +52,9 @@ const setPage = (page) => ({
 });
 
 export const fetchPage = (username, page) => async (dispatch, getState) => {
+  if(!username) {
+    return dispatch(setUsername(''));
+  }
 
   // if username has changed, change username and invalidate the cache
   if(getState().repos.username !== username) {
@@ -61,23 +65,19 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
     return history.replace(`/${getState().repos.username}/1`);
   }
 
-  // if requested items are already in the cache just change the page number
-  const itemsPerPage = getState().repos.itemsPerPage;
-  if(Object.keys(getState().repos.items.slice((page - 1) * itemsPerPage, page * itemsPerPage)).length === itemsPerPage) {
-    dispatch(setPage(page));
-    return;
+  if(!isFetchNeeded(getState(), page)) {
+    return dispatch(setPage(page));
   }
 
   //else fetch next page of 30 repositories
   dispatch(requestRepos());
   try {
-    const pageNeeded = Math.ceil(page * itemsPerPage / 30);
+    const pageNeeded = Math.ceil(page * getState().repos.itemsPerPage / ITEMS_PER_API_PAGE);
     const response = await octokit.request('/search/repositories', {
-      q: `user:${getState().repos.username}`,
-      per_page: 30,
+      q: `user:${username}`,
+      per_page: ITEMS_PER_API_PAGE,
       page: pageNeeded,
-      sort: 'stars',
-      direction: 'desc'
+      sort: 'stars'
     });
 
     //if page number is too big, redirect back to 1st
@@ -87,8 +87,7 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
 
     dispatch(receiveRepos(response.data.items, response.data.total_count, page, pageNeeded));
   } catch (e) {
-    console.log(e);
-    if(e.status === 422 && e.errors.some(error => error.field === 'q' && error.code === 'invalid')) {
+    if(e.status === 422 && e.errors && e.errors.some(error => error.field === 'q' && error.code === 'invalid')) {
       dispatch(receiveReposError(ERROR_USER_NOT_FOUND));
     } else if(e.status === 403) {
       dispatch(receiveReposError(ERROR_TOO_FAST));
@@ -99,4 +98,9 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
   }
 
 };
+
+function isFetchNeeded({repos: {items, totalCount, itemsPerPage}}, page) {
+  const itemsNeeded = clamp(totalCount - (page - 1) * itemsPerPage, itemsPerPage);
+  return !totalCount || Object.keys(items.slice((page - 1) * itemsPerPage, page * itemsPerPage)).length !== itemsNeeded;
+}
 

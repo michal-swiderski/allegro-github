@@ -1,5 +1,6 @@
 import {RECEIVE_REPOS, RECEIVE_REPOS_ERROR, REQUEST_REPOS, SET_PAGE, SET_USERNAME} from "../actions";
 import produce from "immer";
+import {ITEMS_PER_API_PAGE} from "../../constants";
 
 const initialState = {
   username: '',
@@ -31,7 +32,7 @@ const repos = (state = initialState, {type, payload}) => {
 
         // put items in correct places in a sparse array
         payload.items.forEach((item, idx) => {
-          draft.items[idx + (payload.apiPage - 1) * 30] = item;
+          draft.items[idx + (payload.apiPage - 1) * ITEMS_PER_API_PAGE] = item;
         });
       });
     }

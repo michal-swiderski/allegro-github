@@ -12,6 +12,7 @@ const RepoTile = ({repo, unloaded}) => {
       <MainWrapper>
         <MockRectangle width="25%"/>
         <MockRectangle width="75%"/>
+        <MockRectangle width="0%"/>
         <MockRectangle width="12.5%"/>
       </MainWrapper>
     )
@@ -34,8 +35,8 @@ const RepoTile = ({repo, unloaded}) => {
 };
 
 RepoTile.propTypes = {
-  repo: PropTypes.object.isRequired,
-  mock: PropTypes.bool
+  repo: PropTypes.object,
+  unloaded: PropTypes.bool
 };
 
 export default React.memo(RepoTile);

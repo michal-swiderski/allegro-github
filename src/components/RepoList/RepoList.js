@@ -5,15 +5,16 @@ import {getReposForUser, getTotalRepoCount, getUsername, isError, isFetching} fr
 import {ErrorWrapper, NoWrap} from "./styles";
 import {StyledLink} from "../common/Link/Link";
 import {ERROR_USER_NOT_FOUND} from "../../constants";
+import {range} from "lodash";
 
-const RepoList = props => {
+const RepoList = () => {
   const repos = useSelector(getReposForUser);
   const username = useSelector(getUsername);
   const total = useSelector(getTotalRepoCount);
   const error = useSelector(isError);
   const fetching = useSelector(isFetching);
 
-  if(total === 0) {
+  if (total === 0) {
     return (
       <ErrorWrapper>
         <span>
@@ -26,33 +27,23 @@ const RepoList = props => {
 
   if (error) {
     let errorMessage;
-    if(error === ERROR_USER_NOT_FOUND) {
+    if (error === ERROR_USER_NOT_FOUND) {
       errorMessage = <>{`User ${username} not found`} <NoWrap>¯\_(ツ)_/¯</NoWrap></>;
     } else {
       errorMessage = <>{`Something went wrong. Try again`} <NoWrap>(╯°□°)╯︵┻━┻</NoWrap></>;
     }
-    return (
-      <ErrorWrapper>{errorMessage}</ErrorWrapper>
-    )
+    return <ErrorWrapper>{errorMessage}</ErrorWrapper>;
   }
 
   if (username === '') {
-    return (
-      <ErrorWrapper>Nothing to see here, type a username in the box above!</ErrorWrapper>
-    );
+    return <ErrorWrapper>Nothing to see here, type a username in the box above!</ErrorWrapper>;
   }
 
-  const repoTiles = repos.map(repo => (
-    <RepoTile repo={repo} key={repo.id}/>
-  ));
+  if (fetching) {
+    return <div>{range(0, 5).map(idx => <RepoTile key={idx} unloaded/>)}</div>;
+  }
 
-  return (
-    <div>
-      {repoTiles}
-    </div>
-  );
+  return <div>{repos.map(repo => <RepoTile repo={repo} key={repo.id}/>)}</div>;
 };
-
-RepoList.propTypes = {};
 
 export default RepoList;
