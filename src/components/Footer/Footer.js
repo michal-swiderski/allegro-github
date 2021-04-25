@@ -5,7 +5,7 @@ import {faMoon} from "@fortawesome/free-regular-svg-icons";
 import {faSun} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {getTheme} from "../../store/selectors";
-import {toggleTheme} from "../../store/actions";
+import {setDarkTheme} from "../../store/actions";
 import {withTheme} from "styled-components";
 
 const Footer = () => {
@@ -13,7 +13,7 @@ const Footer = () => {
   const darkTheme = useSelector(getTheme);
 
   const handleCheck = () => {
-    dispatch(toggleTheme());
+    dispatch(setDarkTheme(!darkTheme));
   }
 
   return (

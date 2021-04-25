@@ -3,7 +3,7 @@ import history from "../history";
 import {ERROR_TOO_FAST, ERROR_UNKNOWN, ERROR_USER_NOT_FOUND, ITEMS_PER_API_PAGE} from "../constants";
 import {clamp} from "lodash";
 
-export const TOGGLE_THEME = 'TOGGLE_THEME';
+export const SET_DARK_THEME = 'SET_DARK_THEME';
 export const SET_USERNAME = 'SET_USERNAME';
 export const SET_REPOS = 'SET_REPOS';
 export const REQUEST_REPOS = 'REQUEST_REPOS';
@@ -13,8 +13,9 @@ export const SET_PAGE = 'SET_PAGE';
 
 const octokit = new Octokit();
 
-export const toggleTheme = () => ({
-  type: TOGGLE_THEME,
+export const setDarkTheme = isDarkTheme => ({
+  type: SET_DARK_THEME,
+  payload: isDarkTheme
 });
 
 export const setUsername = username => ({
