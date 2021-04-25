@@ -28,7 +28,7 @@ const StyledButton = styled.button`
     background-color: ${props => props.theme.colors.buttonDisabled};
   }
   
-  :active {
+  :active:not(:disabled) {
     background-color: ${props => props.theme.colors.primaryLight2};
   }
 `;
