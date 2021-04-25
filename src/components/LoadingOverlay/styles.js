@@ -8,7 +8,7 @@ export const StyledOverlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: black;
-  opacity: 0.2;
+  opacity: 0.05;
   animation: fadein 0.1s linear;
   
   @keyframes fadein {
@@ -16,7 +16,7 @@ export const StyledOverlay = styled.div`
       opacity: 0;
     }
     100% {
-      opacity: 0.4;
+      opacity: 0.05;
     }
   }
   
