@@ -1,6 +1,6 @@
 import {Octokit} from "@octokit/rest";
 import history from "../history";
-import {ERROR_TOO_FAST, ERROR_UNKNOWN, ERROR_USER_NOT_FOUND, ITEMS_PER_API_PAGE} from "../constants";
+import {ERROR_TOO_FAST, ERROR_UNKNOWN, ERROR_USER_NOT_FOUND, ITEMS_PER_API_PAGE, ITEMS_PER_PAGE} from "../constants";
 import {clamp} from "lodash";
 
 export const SET_DARK_THEME = 'SET_DARK_THEME';
@@ -62,7 +62,8 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
     dispatch(setUsername(username));
   }
 
-  if(page < 1) {
+  // max 1000 results available
+  if(page < 1 || page > 200) {
     return history.replace(`/${getState().repos.username}/1`);
   }
 
@@ -82,7 +83,7 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
     });
 
     //if page number is too big, redirect back to 1st
-    if(page * 5 - response.data.total_count > 5) {
+    if(page * ITEMS_PER_PAGE - response.data.total_count > ITEMS_PER_PAGE) {
       return history.replace(`/${getState().repos.username}/1`);
     }
 

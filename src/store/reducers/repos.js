@@ -1,6 +1,6 @@
 import {RECEIVE_REPOS, RECEIVE_REPOS_ERROR, REQUEST_REPOS, SET_PAGE, SET_USERNAME} from "../actions";
 import produce from "immer";
-import {ITEMS_PER_API_PAGE} from "../../constants";
+import {ITEMS_PER_API_PAGE, ITEMS_PER_PAGE} from "../../constants";
 
 const initialState = {
   username: '',
@@ -8,7 +8,7 @@ const initialState = {
   isFetching: false,
   totalCount: null,
   currentPage: null,
-  itemsPerPage: 5,
+  itemsPerPage: ITEMS_PER_PAGE,
   items: []
 };
 
