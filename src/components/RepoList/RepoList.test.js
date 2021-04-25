@@ -54,6 +54,23 @@ test('It should display a message when user has no repositories', async () => {
   expect(screen.getByText(/any public repositories/)).toBeInTheDocument();
 });
 
+test('It should display a message when no username is entered', async () => {
+  renderWithProviders(<RepoList/>, {
+    initialState: {
+      repos: {
+        username: '',
+        items: [],
+        totalCount: null,
+        error: null,
+        currentPage: null,
+        itemsPerPage: 5
+      }
+    }
+  });
+
+  expect(screen.getByText('Nothing to see here, type a username into the box above!')).toBeInTheDocument();
+});
+
 test('It should display a message when user has not been found', async () => {
   const username = 'allegro';
   renderWithProviders(<RepoList/>, {

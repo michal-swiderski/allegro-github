@@ -14,6 +14,10 @@ const RepoList = () => {
   const error = useSelector(isError);
   const fetching = useSelector(isFetching);
 
+  if (username === '') {
+    return <ErrorWrapper>Nothing to see here, type a username into the box above!</ErrorWrapper>;
+  }
+
   if (total === 0) {
     return (
       <ErrorWrapper>
@@ -33,10 +37,6 @@ const RepoList = () => {
       errorMessage = <>{`Something went wrong. Try again`} <NoWrap>(╯°□°)╯︵┻━┻</NoWrap></>;
     }
     return <ErrorWrapper>{errorMessage}</ErrorWrapper>;
-  }
-
-  if (username === '') {
-    return <ErrorWrapper>Nothing to see here, type a username in the box above!</ErrorWrapper>;
   }
 
   if (fetching) {
