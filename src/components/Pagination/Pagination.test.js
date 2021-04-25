@@ -32,8 +32,8 @@ test('Next button is disabled and previous button is active when on the last pag
 
   renderWithProviders(<Pagination/>, {store});
 
-  expect(screen.getByText('Previous')).not.toHaveAttribute('disabled');
-  expect(screen.getByText('Next')).toHaveAttribute('disabled');
+  expect(screen.getByTitle('Previous page')).not.toHaveAttribute('disabled');
+  expect(screen.getByTitle('Next page')).toHaveAttribute('disabled');
 });
 
 test('Previous button is disabled and \'next\' button is active when on the first page', async () => {
@@ -47,8 +47,8 @@ test('Previous button is disabled and \'next\' button is active when on the firs
 
   renderWithProviders(<Pagination/>, {store});
 
-  expect(screen.getByText('Previous')).toHaveAttribute('disabled');
-  expect(screen.getByText('Next')).not.toHaveAttribute('disabled');
+  expect(screen.getByTitle('Previous page')).toHaveAttribute('disabled');
+  expect(screen.getByTitle('Next page')).not.toHaveAttribute('disabled');
 });
 
 test('It changes page upon clicking the \'Next\' button', async () => {
@@ -65,7 +65,7 @@ test('It changes page upon clicking the \'Next\' button', async () => {
   const history = createBrowserHistory();
   renderWithProviders(<Pagination/>, {store, history});
 
-  fireEvent.click(screen.getByText('Next'));
+  fireEvent.click(screen.getByTitle('Next page'));
   expect(history.location.pathname).toEqual(`/${username}/${page + 1}`);
 });
 
@@ -83,6 +83,6 @@ test('It changes page upon clicking the \'Previous\' button', async () => {
   const history = createBrowserHistory();
   renderWithProviders(<Pagination/>, {store, history});
 
-  fireEvent.click(screen.getByText('Previous'));
+  fireEvent.click(screen.getByTitle('Previous page'));
   expect(history.location.pathname).toEqual(`/${username}/${page - 1}`);
 });

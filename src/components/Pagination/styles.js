@@ -1,13 +1,19 @@
 import styled from 'styled-components';
+import breakpoints from "../../style/breakpoints";
 
 export const MainWrapper = styled.div`
-  //margin-top: ${props => props.theme.spacing.padding}px;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   
-  & > *:not(:last-child) {
-    margin-right: 16px;
+  @media (max-width: ${breakpoints.sm}) {
+    justify-content: space-between;
+  }
+  
+  @media (min-width: ${breakpoints.sm}) {
+    & > *:not(:last-child) {
+      margin-right: 8px;
+    }
   }
 `;
 

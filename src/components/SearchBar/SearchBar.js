@@ -8,11 +8,10 @@ import Pagination from "../Pagination/Pagination";
 import {useHistory, useParams} from "react-router-dom";
 import {fetchPage} from "../../store/actions";
 
-const SearchBar = props => {
+const SearchBar = () => {
   const dispatch = useDispatch();
 
   const [username, setUsername] = useState('');
-  const [inputFocused, setInputFocused] = useState(false);
 
   const storeUsername = useSelector(getUsername);
   const error = useSelector(isError);
@@ -33,32 +32,34 @@ const SearchBar = props => {
   const handleSubmit = e => {
     e.preventDefault();
     //if an error occured, manually dispatch a fetch action to force a refresh
-    if(error && username === storeUsername) {
+    if (error && username === storeUsername) {
       return dispatch(fetchPage(username, currentPage || Number(params.page)));
     }
-    history.push(`/${username}/1`);
+    if (username) {
+      history.push(`/${username}/1`);
+    } else {
+      history.push(`/`);
+    }
+
   }
 
   const showPagination = !error && !!storeUsername && total > 0;
 
   return (
-      <MainWrapper>
-        <PaginationWrapper>
-          {showPagination && <Pagination/>}
-        </PaginationWrapper>
-        <SearchWrapper onSubmit={handleSubmit}>
-          <InputWrapper>
-            <TextInput fullWidth placeholder="Username..." value={username} onChange={handleChange}
-                       onFocus={() => setInputFocused(true)}/>
-          </InputWrapper>
-          <ButtonWrapper>
-            <Button fullWidth disabled={username === ''}>Search</Button>
-          </ButtonWrapper>
-        </SearchWrapper>
-      </MainWrapper>
+    <MainWrapper>
+      <PaginationWrapper>
+        {showPagination && <Pagination/>}
+      </PaginationWrapper>
+      <SearchWrapper onSubmit={handleSubmit}>
+        <InputWrapper>
+          <TextInput fullWidth placeholder="Username..." value={username} onChange={handleChange}/>
+        </InputWrapper>
+        <ButtonWrapper>
+          <Button fullWidth disabled={username === ''} title="Search">Search</Button>
+        </ButtonWrapper>
+      </SearchWrapper>
+    </MainWrapper>
   );
 };
-
-SearchBar.propTypes = {};
 
 export default SearchBar;
