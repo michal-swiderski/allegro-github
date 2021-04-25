@@ -4,9 +4,9 @@ import {BadgesWrapper, DescriptionText, MainWrapper, MockRectangle} from "./styl
 import Badge from "./Badge/Badge";
 import {faBalanceScale, faCode, faCodeBranch, faStar} from "@fortawesome/free-solid-svg-icons";
 import {StyledLink} from "../common/Link/Link";
+import dayjs from 'dayjs';
 
 const RepoTile = ({repo, unloaded}) => {
-
   if(unloaded) {
     return (
       <MainWrapper>
@@ -29,6 +29,7 @@ const RepoTile = ({repo, unloaded}) => {
         {repo.language && <Badge icon={faCode} label={repo.language}/>}
         <Badge icon={faCodeBranch} label={repo.forks_count}/>
         {repo.license && <Badge icon={faBalanceScale} label={repo.license.name}/>}
+        <Badge label={`Updated ${dayjs().to(dayjs(repo.updated_at))}`}/>
       </BadgesWrapper>
     </MainWrapper>
   );
