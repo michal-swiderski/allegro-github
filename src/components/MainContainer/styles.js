@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import breakpoints from "../../style/breakpoints";
 
-export const GithubLogo = styled.img`
-  height: 100px;
-  transform: translateX(-16px);
-`;
-
 export const MainWrapper = styled.main`
   max-width: 800px;
   margin: auto;

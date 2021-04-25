@@ -22,9 +22,9 @@ export const BadgesWrapper = styled.div`
 
 export const MockRectangle = styled.div`
   width: ${props => props.width};
-  height: 16px;
+  height: ${props => props.theme.spacing.padding}px;
   border-radius: 2px;
-  background-color: lightgray;
+  background-color: ${props => props.theme.colors.borderGray};
   margin-bottom: ${props => props.theme.spacing.padding / 2}px;
   
   &:last-child {
