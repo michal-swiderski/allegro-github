@@ -28,7 +28,7 @@ const RepoList = () => {
   if (error) {
     let errorMessage;
     if (error === ERROR_USER_NOT_FOUND) {
-      errorMessage = <>{`User ${username} not found`} <NoWrap>¯\_(ツ)_/¯</NoWrap></>;
+      errorMessage = <>{`User ${username} not found.`} <NoWrap>¯\_(ツ)_/¯</NoWrap></>;
     } else {
       errorMessage = <>{`Something went wrong. Try again`} <NoWrap>(╯°□°)╯︵┻━┻</NoWrap></>;
     }

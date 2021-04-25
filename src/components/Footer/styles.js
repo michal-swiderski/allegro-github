@@ -11,7 +11,7 @@ export const StyledFooter = styled.footer`
   font-size: 1.2rem;
   
   & > a {
-    margin-right: ${props => props.theme.spacing.padding / 2}px;;
+    margin-right: ${props => props.theme.spacing.padding / 2}px;
   }
 `;
 
