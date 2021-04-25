@@ -1,6 +1,13 @@
 import {Octokit} from "@octokit/rest";
 import history from "../history";
-import {ERROR_TOO_FAST, ERROR_UNKNOWN, ERROR_USER_NOT_FOUND, ITEMS_PER_API_PAGE, ITEMS_PER_PAGE} from "../constants";
+import {
+  ERROR_TOO_FAST,
+  ERROR_UNKNOWN,
+  ERROR_USER_NOT_FOUND,
+  ITEMS_PER_API_PAGE,
+  ITEMS_PER_PAGE,
+  MAX_API_RESULTS
+} from "../constants";
 import {clamp} from "lodash";
 
 export const SET_DARK_THEME = 'SET_DARK_THEME';
@@ -63,7 +70,7 @@ export const fetchPage = (username, page) => async (dispatch, getState) => {
   }
 
   // max 1000 results available
-  if(page < 1 || page > 200) {
+  if(page < 1 || page > MAX_API_RESULTS / ITEMS_PER_PAGE) {
     return history.replace(`/${getState().repos.username}/1`);
   }
 

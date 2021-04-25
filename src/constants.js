@@ -4,3 +4,5 @@ export const ERROR_UNKNOWN = 'ERROR_UNKNOWN';
 
 export const ITEMS_PER_PAGE = 5;
 export const ITEMS_PER_API_PAGE = 30;
+
+export const MAX_API_RESULTS = 1000;
