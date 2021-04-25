@@ -12,4 +12,4 @@ Aplikacja będzie dostępna na porcie 3000
 ### Uruchomienie testów
 `npm test`
 
-### Aplikacja dosępna jest też pod adresem https://allegro-github.herokuapp.com/
+### Aplikacja dostępna jest też pod adresem: https://allegro-github.herokuapp.com/
