@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {BadgesWrapper, DescriptionText, MainWrapper, MockRectangle} from "./styles";
 import Badge from "./Badge/Badge";
 import {faBalanceScale, faCode, faCodeBranch, faStar} from "@fortawesome/free-solid-svg-icons";
-import {StyledLink} from "../common/Link/Link";
+import {StyledLink} from "../../common/Link/Link";
 import dayjs from 'dayjs';
 
 const RepoTile = ({repo, unloaded}) => {

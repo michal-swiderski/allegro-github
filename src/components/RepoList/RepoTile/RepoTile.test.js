@@ -1,4 +1,4 @@
-import {renderWithProviders} from "../../testUtils";
+import {renderWithProviders} from "../../../testUtils";
 import {screen} from "@testing-library/react";
 import React from "react";
 import RepoTile from "./RepoTile";

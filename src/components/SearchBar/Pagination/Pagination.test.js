@@ -1,10 +1,10 @@
 import React from 'react'
 import {fireEvent, screen} from '@testing-library/react'
-import {renderWithProviders} from '../../testUtils';
+import {renderWithProviders} from '../../../testUtils';
 import Pagination from "./Pagination";
 import 'jest-styled-components';
 import {createStore} from "redux";
-import rootReducer from '../../store/reducers';
+import rootReducer from '../../../store/reducers';
 import {createBrowserHistory} from "history";
 
 test('Displays current page and calculates number of pages correctly', async () => {

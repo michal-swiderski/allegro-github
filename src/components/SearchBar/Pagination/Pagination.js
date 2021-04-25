@@ -1,8 +1,8 @@
 import React from "react";
 import {MainWrapper, PagesWrapper} from "./styles";
-import Button from "../common/Button/Button";
+import Button from "../../common/Button/Button";
 import {useSelector} from "react-redux";
-import {getCurrentPage, getTotalRepoCount, getUsername} from "../../store/selectors";
+import {getCurrentPage, getTotalRepoCount, getUsername} from "../../../store/selectors";
 import {useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleDoubleLeft, faAngleDoubleRight, faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";

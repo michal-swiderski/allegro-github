@@ -4,7 +4,7 @@ import TextInput from "../common/Input/TextInput";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "../common/Button/Button";
 import {getCurrentPage, getTotalRepoCount, getUsername, isError} from "../../store/selectors";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "./Pagination/Pagination";
 import {useHistory, useParams} from "react-router-dom";
 import {fetchPage} from "../../store/actions";
 

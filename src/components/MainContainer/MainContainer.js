@@ -9,7 +9,7 @@ import {fetchPage} from "../../store/actions";
 import {MainContentWrapper, MainWrapper} from "./styles";
 
 
-const MainContainer = props => {
+const MainContainer = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const loading = useSelector(isFetching);
@@ -21,9 +21,6 @@ const MainContainer = props => {
   return (
     <div>
       <MainWrapper>
-        {/*<header>*/}
-        {/*  <GithubLogo src={GitHubLogo} alt="github logo"/>*/}
-        {/*</header>*/}
         <MainContentWrapper>
           <LoadingOverlay show={loading}/>
           <SearchBar/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import RepoTile from "../RepoTile/RepoTile";
+import RepoTile from "./RepoTile/RepoTile";
 import {useSelector} from "react-redux";
 import {getReposForUser, getTotalRepoCount, getUsername, isError, isFetching} from "../../store/selectors";
 import {ErrorWrapper, NoWrap} from "./styles";

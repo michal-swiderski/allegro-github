@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ErrorWrapper = styled.main`
+export const ErrorWrapper = styled.div`
   text-align: center;
   padding: ${props => props.theme.spacing.padding * 2}px;
   color: ${props => props.theme.colors.textColorSecondary};
