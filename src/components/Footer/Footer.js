@@ -29,8 +29,4 @@ const Footer = () => {
   );
 };
 
-Footer.propTypes = {
-
-};
-
 export default withTheme(Footer);

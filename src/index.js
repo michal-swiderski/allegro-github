@@ -5,6 +5,10 @@ import App from './App';
 import {Provider} from "react-redux";
 import store from './store/store';
 import {setDarkTheme} from "./store/actions";
+import dayjs from 'dayjs';
+import x from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(x);
 
 const darkTheme = JSON.parse(localStorage.getItem('darkTheme'));
 store.dispatch(setDarkTheme(darkTheme));
