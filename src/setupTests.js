@@ -4,6 +4,6 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import dayjs from 'dayjs';
-import x from 'dayjs/plugin/relativeTime';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
-dayjs.extend(x);
+dayjs.extend(relativeTime);
